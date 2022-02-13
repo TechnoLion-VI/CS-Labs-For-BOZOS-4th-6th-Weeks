@@ -1,0 +1,51 @@
+import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+
+//
+// Decompiled by Procyon v0.5.36
+//
+
+class UserInputPanel extends JPanel implements ActionListener
+{
+    private BSTcontroller controller;
+    JTextField numberField;
+    JButton addNodeButton;
+
+    public void setController(final BSTcontroller c) {
+        this.controller = c;
+    }
+
+    public UserInputPanel() {
+        this.numberField = new JTextField(25);
+        (this.addNodeButton = new JButton("Add Node(s)")).addActionListener(this);
+        this.add(this.numberField);
+        this.add(this.addNodeButton);
+    }
+
+    @Override
+    public void actionPerformed(final ActionEvent e) {
+        if (e.getSource() == this.addNodeButton) {
+            final String COMMA = ",";
+            final String text = this.numberField.getText();
+            if (text.equals("")) {
+                this.controller.addNode(Math.floor(Math.random() * 1000.0));
+                return;
+            }
+            if (text.contains(",")) {
+                final String[] split;
+                final String[] numbers = split = text.split(",");
+                for (final String num : split) {
+                    this.controller.addNode(Double.parseDouble(num));
+                }
+            }
+            else {
+                this.controller.addNode(Double.parseDouble(text));
+            }
+            this.numberField.setText(null);
+        }
+    }
+}

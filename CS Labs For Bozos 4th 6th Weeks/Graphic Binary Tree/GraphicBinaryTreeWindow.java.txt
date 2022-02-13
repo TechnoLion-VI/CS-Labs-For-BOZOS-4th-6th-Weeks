@@ -1,0 +1,41 @@
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JPanel;
+import java.awt.LayoutManager;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
+
+//
+// Decompiled by Procyon v0.5.36
+//
+
+public class GraphicBinaryTreeWindow extends JFrame
+{
+    final String title = "Graphic Binary Tree";
+
+    private static JLabel getCenterAlignedJLabel(final String text) {
+        final JLabel l = new JLabel(text, 0);
+        l.setAlignmentX(0.5f);
+        return l;
+    }
+
+    public GraphicBinaryTreeWindow() {
+        this.setDefaultCloseOperation(3);
+        this.setTitle("Graphic Binary Tree");
+        this.setLayout(new BoxLayout(this.getContentPane(), 1));
+        final UserInputPanel userInputPanel = new UserInputPanel();
+        final GraphicBinaryTreeVisualizer graphicBinaryTreeVisualizer = new GraphicBinaryTreeVisualizer();
+        final BSTcontroller controller = new BSTcontroller(userInputPanel, graphicBinaryTreeVisualizer);
+        final JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, 1));
+        infoPanel.add(getCenterAlignedJLabel("Type a decimal number in the box below and click the button to insert it as a tree node."));
+        infoPanel.add(getCenterAlignedJLabel("You can also type a comma-separated series of numbers to add them to the tree, in the order that you typed them in, all in one go."));
+        infoPanel.add(getCenterAlignedJLabel("Leave the box blank to insert a random number from 0 to 999."));
+        this.add(infoPanel);
+        this.add(userInputPanel);
+        this.add(graphicBinaryTreeVisualizer);
+        this.pack();
+        this.setVisible(true);
+    }
+}
